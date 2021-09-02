@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import FruitList from "./components/FruitList/fruitList";
+import FruitList from "./components/FruitList/FruitList";
 
 function App() {
   const [fruits, setFruits] = useState([
@@ -13,13 +13,9 @@ function App() {
     return <li key={index}>{fruit.name}</li>;
   });
 
-  const redFruits = fruits
-    .filter((fruit) => fruit.color === "red")
-    .map((fruit, index) => <li key={index}>{fruit.name}</li>);
-
-  function filterRedFruit() {
-    return setFruits(redFruits);
-  }
+  const filterRedFruits = () => {
+    setFruits(fruits.filter((fruit) => fruit.color === "red"));
+  };
 
   const totalPrice = fruits.reduce((acc, value) => {
     return value.price + acc;
@@ -29,11 +25,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div>
-          <p>O preço total é de {totalPrice}</p>
-          {/* <FruitList fruit={fruits}></FruitList> */}
-          <p>{fruitNames}</p>
-          <button>Clique aqui para filtrar</button>
-          {/* <p>{redFruits}</p> */}
+          <h3>O preço é de : {totalPrice}</h3>
+
+          <ul>{fruitNames}</ul>
+          <button onClick={filterRedFruits}>Filter red fruits</button>
         </div>
       </header>
     </div>
